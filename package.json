@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "create-link-run build",
+    "dev": "create-link-run dev",
+    "start": "create-link-run dev",
+    "upload": "create-link-run upload",
+    "update": "create-link-run upload --update"
+  },
+  "devDependencies": {
+    "@linktr.ee/create-link": "latest",
+    "@linktr.ee/ui-link-kit": "latest",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "resolutions": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
