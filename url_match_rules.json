@@ -1,0 +1,14 @@
+{
+  "hostnames": ["laylo.com"],
+  "patterns": [
+    {
+      "pathname": "/:userSlug"
+    },
+    {
+      "pathname": "/:userSlug/:dropSlug"
+    },
+    {
+      "pathname": "/:userSlug/m/:dropSlug"
+    }
+  ]
+}

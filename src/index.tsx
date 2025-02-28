@@ -4,8 +4,6 @@ import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
 window.React = React;
-const TEST_USERNAME = "lucydacus";
-const TEST_DROP_ID = "sRYeXI";
 
 function App({ __linkUrl = "" }: SettingsData) {
   const embedRef = useRef<HTMLDivElement | null>(null);
@@ -13,8 +11,8 @@ function App({ __linkUrl = "" }: SettingsData) {
   const [dropAttached, setDropAttached] = React.useState(false);
 
   const fetchDrop = async ({
-    dropId = TEST_DROP_ID,
-    username = TEST_USERNAME,
+    dropId,
+    username,
   }: {
     dropId: string;
     username: string;
@@ -50,7 +48,7 @@ function App({ __linkUrl = "" }: SettingsData) {
       return;
     }
 
-    const [username, dropId, multidropId] = __linkUrl
+    const [username, dropId = "profile", multidropId] = __linkUrl
       .replace("laylo.com/", "")
       .replace("http://", "")
       .replace("https://", "")
@@ -59,9 +57,15 @@ function App({ __linkUrl = "" }: SettingsData) {
 
     const dropIdToUse = dropId === "m" ? multidropId : dropId;
 
+    if (!username) {
+      clearInterval(loadLayloInterval);
+
+      return;
+    }
+
     const { drop, location } = await fetchDrop({
       dropId: dropIdToUse,
-      username: __linkUrl ? username : TEST_USERNAME,
+      username: username,
     });
     const userId = drop.user.id;
     const user = await fetchUser({ userId });
@@ -100,7 +104,7 @@ function App({ __linkUrl = "" }: SettingsData) {
       attachDrop();
       clearInterval(loadLayloInterval);
     }
-  }, 100);
+  }, 25);
 
   useEffect(() => {
     const head = document.head;
@@ -114,6 +118,13 @@ function App({ __linkUrl = "" }: SettingsData) {
     const loadScripts = async () => {
       await loadScript("https://embed.laylo.com/linktree/laylo.js");
       loadedLaylo.current = true;
+      await loadScript(
+        "https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily"
+      );
+
+      const style = document.createElement("style");
+      style.innerHTML = ".grecaptcha-badge { display: none; }";
+      document.head.appendChild(style);
     };
 
     loadScripts();
@@ -121,7 +132,7 @@ function App({ __linkUrl = "" }: SettingsData) {
 
   return (
     <Container
-      logo="https://public.laylo.com/assets/layloLogos/blackLayloLogoWithName.svg"
+      logo="https://public.laylo.com/assets/branding/laylo-wordmark-grey-minimum.svg"
       skeleton={(dropAttached ? null : <EmbedLoading />) as any}
     >
       <Embed ref={embedRef} />

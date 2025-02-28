@@ -2,22 +2,30 @@
   "name": "Laylo Tours",
   "tagline": "Tour signups and links",
   "description": [
-    "The simple greeting link is an example link type which enables a user to to show a simple greeting on their linktr.ee profile.",
-    "This example code acts as a base for experimenting with link type capabilities"
+    "Display a tour widget directly within your Linktr.ee, powered by Laylo"
   ],
   "manifest_version": "1.0.0",
   "supporting_links": {
-    "terms_of_service": "https://example.com/terms-of-service",
-    "privacy_policy": "https://example.com/privacy-policy"
+    "terms_of_service": "https://laylo.com/terms",
+    "privacy_policy": "https://laylo.com/privacy"
   },
   "category": "grow",
-  "search_terms": ["search term 1", "search term 2"],
+  "search_terms": [
+    "tours",
+    "shows",
+    "tickets",
+    "ticketmaster",
+    "axs",
+    "laylo",
+    "multidrop",
+    "drop"
+  ],
   "author": {
     "name": "Laylo",
     "accounts": ["scottlaylo"],
     "contact": {
       "url": "https://laylo.com",
-      "email": "support@laylo.com"
+      "email": "contact@laylo.com"
     }
   }
 }
