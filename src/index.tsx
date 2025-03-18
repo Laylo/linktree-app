@@ -64,7 +64,7 @@ function App({ __linkUrl = "" }: SettingsData) {
     }
 
     const { drop, location } = await fetchDrop({
-      dropId: dropIdToUse,
+      dropId: dropIdToUse.replace("@b0t", ""),
       username: username,
     });
     const userId = drop.user.id;
