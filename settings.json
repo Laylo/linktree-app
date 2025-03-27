@@ -1,20 +1,8 @@
 {
-  "title": "Laylo Tours",
+  "title": "Laylo",
   "overview": {
     "title": "Laylo",
-    "description": "Let fans RSVP and find ticket links for your upcoming events."
+    "description": "Display your Laylo Drops directly within your Linktree"
   },
-  "elements": [
-    {
-      "inputType": "linkBehavior",
-      "id": "behavior",
-      "title": "Link Behavior",
-      "description": "When a user interacts with this link:",
-      "linkBehaviorLabels": {
-        "embedLabel": "Display my tour",
-        "linkOffLabel": "Go directly to URL"
-      },
-      "defaultValue": "embedLabel"
-    }
-  ]
+  "elements": []
 }

@@ -1,9 +1,7 @@
 {
-  "name": "Laylo Tours",
-  "tagline": "Tour signups and links",
-  "description": [
-    "Display a tour widget directly within your Linktr.ee, powered by Laylo"
-  ],
+  "name": "Laylo",
+  "tagline": "Promote your drops and tours",
+  "description": ["Display your Laylo Drops directly within your Linktree"],
   "manifest_version": "1.0.0",
   "supporting_links": {
     "terms_of_service": "https://laylo.com/terms",
