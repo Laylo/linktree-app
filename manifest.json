@@ -3,6 +3,7 @@
   "tagline": "Promote your drops and tours",
   "description": ["Display your Laylo Drops directly within your Linktree"],
   "manifest_version": "1.0.0",
+  "visibility": "hidden",
   "supporting_links": {
     "terms_of_service": "https://laylo.com/terms",
     "privacy_policy": "https://laylo.com/privacy"

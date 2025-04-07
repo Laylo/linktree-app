@@ -4,5 +4,17 @@
     "title": "Laylo",
     "description": "Display your Laylo Drops directly within your Linktree"
   },
-  "elements": []
+  "elements": [
+    {
+      "inputType": "linkBehavior",
+      "id": "behavior",
+      "title": "Link Behavior",
+      "description": "When a user interacts with this link:",
+      "linkBehaviorLabels": {
+        "embedLabel": "Display my drop (recommended)",
+        "linkOffLabel": "Go directly to Laylo"
+      },
+      "defaultValue": "embedLabel"
+    }
+  ]
 }

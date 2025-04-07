@@ -1,11 +1,12 @@
-import { Container, Embed, EmbedLoading } from "@linktr.ee/ui-link-kit";
-import { SettingsData } from "./types";
+import { Container, Embed, GroupedListLoading } from "@linktr.ee/ui-link-kit";
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
+import { SettingsData } from "./types";
 
 window.React = React;
 
-function App({ __linkUrl = "" }: SettingsData) {
+function App(props: SettingsData) {
+  const { __linkUrl = "", __layout } = props;
   const embedRef = useRef<HTMLDivElement | null>(null);
   const loadedLaylo = useRef(false);
   const [dropAttached, setDropAttached] = React.useState(false);
@@ -82,12 +83,15 @@ function App({ __linkUrl = "" }: SettingsData) {
       location
     );
 
+    setDropAttached(true);
+
     ReactDOM.render(
       <DataProvider
-        customTheme="linktree"
+        customTheme={__layout === "featured" ? "linktreeFeatured" : "linktree"}
         userOverrides={user}
         parentProductOverrides={drop.isMultidrop ? drop : undefined}
         productOverrides={drop}
+        additionalProps={{ linktree: props }}
       >
         <RSVPProvider>
           <LinktreeEmbeddedDrop />
@@ -95,8 +99,6 @@ function App({ __linkUrl = "" }: SettingsData) {
       </DataProvider>,
       embedRef.current
     );
-
-    setDropAttached(true);
   };
 
   const loadLayloInterval = setInterval(() => {
@@ -133,7 +135,7 @@ function App({ __linkUrl = "" }: SettingsData) {
   return (
     <Container
       logo="https://public.laylo.com/assets/branding/laylo-wordmark-grey-minimum.svg"
-      skeleton={(dropAttached ? null : <EmbedLoading />) as any}
+      skeleton={(dropAttached ? null : <GroupedListLoading />) as any}
     >
       <Embed ref={embedRef} />
     </Container>

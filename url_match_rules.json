@@ -9,6 +9,15 @@
     },
     {
       "pathname": "/:userSlug/m/:dropSlug"
+    },
+    {
+      "pathname": "/:userSlug/"
+    },
+    {
+      "pathname": "/:userSlug/:dropSlug/"
+    },
+    {
+      "pathname": "/:userSlug/m/:dropSlug/"
     }
   ]
 }

@@ -5,7 +5,7 @@
     "dev": "create-link-run dev",
     "start": "create-link-run dev",
     "upload": "create-link-run upload",
-    "update": "create-link-run upload --update"
+    "update": "create-link-run upload --update --force-update"
   },
   "devDependencies": {
     "@linktr.ee/create-link": "latest",
