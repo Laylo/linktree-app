@@ -134,7 +134,7 @@ function App(props: SettingsData) {
 
   return (
     <Container
-      logo="https://public.laylo.com/assets/branding/laylo-wordmark-grey-minimum.svg"
+      // logo="https://public.laylo.com/assets/branding/laylo-wordmark-grey-minimum.svg"
       skeleton={(dropAttached ? null : <GroupedListLoading />) as any}
     >
       <Embed ref={embedRef} />
