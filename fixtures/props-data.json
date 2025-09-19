@@ -1,3 +1,11 @@
 {
-  "__linkUrl": "https://laylo.com/scott-dev"
+  "__linkUrl": "https://laylo.com/scott-dev",
+  "__theme": {
+    "textColor": "#000",
+    "backgroundColor": "#F8F9FA",
+    "borderRadius": "0.75rem",
+    "borderColor": "#dbdbdb",
+    "isOutlineStyle": false,
+    "contrastColor": "black"
+  }
 }

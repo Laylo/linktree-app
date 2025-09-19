@@ -1,4 +1,4 @@
-import { Container, Embed, GroupedListLoading } from "@linktr.ee/ui-link-kit";
+import { Embed } from "@linktr.ee/ui-link-kit";
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import { SettingsData } from "./types";
@@ -132,14 +132,7 @@ function App(props: SettingsData) {
     loadScripts();
   }, []);
 
-  return (
-    <Container
-      // logo="https://public.laylo.com/assets/branding/laylo-wordmark-grey-minimum.svg"
-      skeleton={(dropAttached ? null : <GroupedListLoading />) as any}
-    >
-      <Embed ref={embedRef} />
-    </Container>
-  );
+  return <Embed ref={embedRef} />;
 }
 
 const loadScript = (src: string) =>
