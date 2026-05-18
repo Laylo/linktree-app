@@ -116,11 +116,21 @@ function App({ __linkUrl = "" }: SettingsData) {
 
   useEffect(() => {
     const loadScripts = async () => {
+      // Must be set BEFORE laylo.js loads — the embed reads __CAPTCHA_PROVIDER__ at init.
+      // "shadow" runs reCAPTCHA + Turnstile in parallel; reCAPTCHA token is used,
+      // Turnstile is logged for metrics. Matches laylo-drop-page production setting.
+      (window as any).__CAPTCHA_PROVIDER__ = "shadow";
+
       await loadScript("https://embed.laylo.com/linktree/laylo.js");
       loadedLaylo.current = true;
-      await loadScript(
-        "https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily"
-      );
+      await Promise.all([
+        loadScript(
+          "https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily"
+        ),
+        loadScript(
+          "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+        ),
+      ]);
 
       const style = document.createElement("style");
       style.innerHTML = ".grecaptcha-badge { display: none; }";
