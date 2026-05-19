@@ -123,7 +123,7 @@ function App({ __linkUrl = "" }: SettingsData) {
 
       await loadScript("https://embed.laylo.com/linktree/laylo.js");
       loadedLaylo.current = true;
-      await Promise.all([
+      await Promise.allSettled([
         loadScript(
           "https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily"
         ),
