@@ -24,11 +24,19 @@ function App({ __linkUrl = "" }: SettingsData) {
     /** Get the lat and long from cloudfront's headers */
     const userLat = dropResponse.headers.get("CloudFront-Viewer-Latitude");
     const userLong = dropResponse.headers.get("CloudFront-Viewer-Longitude");
+    const userCountry = dropResponse.headers.get("CloudFront-Viewer-Country");
 
     const location = {
       latitude: userLat,
       longitude: userLong,
+      country: userCountry,
     };
+
+    if (!(window as any).Laylo) {
+      (window as any).Laylo = {};
+    }
+
+    (window as any).Laylo.userLocation = location;
 
     const drop = (await dropResponse.json()) as any;
 
