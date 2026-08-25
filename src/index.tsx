@@ -1,11 +1,11 @@
-import { Container, Embed, EmbedLoading } from "@linktr.ee/ui-link-kit";
-import { SettingsData } from "./types";
-import React, { useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import { Container, Embed, EmbedLoading } from '@linktr.ee/ui-link-kit';
+import { SettingsData } from './types';
+import React, { useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 window.React = React;
 
-function App({ __linkUrl = "" }: SettingsData) {
+function App({ __linkUrl = '' }: SettingsData) {
   const embedRef = useRef<HTMLDivElement | null>(null);
   const loadedLaylo = useRef(false);
   const [dropAttached, setDropAttached] = React.useState(false);
@@ -22,13 +22,21 @@ function App({ __linkUrl = "" }: SettingsData) {
     );
 
     /** Get the lat and long from cloudfront's headers */
-    const userLat = dropResponse.headers.get("CloudFront-Viewer-Latitude");
-    const userLong = dropResponse.headers.get("CloudFront-Viewer-Longitude");
+    const userLat = dropResponse.headers.get('CloudFront-Viewer-Latitude');
+    const userLong = dropResponse.headers.get('CloudFront-Viewer-Longitude');
+    const userCountry = dropResponse.headers.get('CloudFront-Viewer-Country');
 
     const location = {
       latitude: userLat,
       longitude: userLong,
+      country: userCountry,
     };
+
+    if (!(window as any).Laylo) {
+      (window as any).Laylo = {};
+    }
+
+    (window as any).Laylo.userLocation = location;
 
     const drop = (await dropResponse.json()) as any;
 
@@ -48,14 +56,14 @@ function App({ __linkUrl = "" }: SettingsData) {
       return;
     }
 
-    const [username, dropId = "profile", multidropId] = __linkUrl
-      .replace("laylo.com/", "")
-      .replace("http://", "")
-      .replace("https://", "")
-      .replace("www.", "")
-      .split("/");
+    const [username, dropId = 'profile', multidropId] = __linkUrl
+      .replace('laylo.com/', '')
+      .replace('http://', '')
+      .replace('https://', '')
+      .replace('www.', '')
+      .split('/');
 
-    const dropIdToUse = dropId === "m" ? multidropId : dropId;
+    const dropIdToUse = dropId === 'm' ? multidropId : dropId;
 
     if (!username) {
       clearInterval(loadLayloInterval);
@@ -64,7 +72,7 @@ function App({ __linkUrl = "" }: SettingsData) {
     }
 
     const { drop, location } = await fetchDrop({
-      dropId: dropIdToUse.replace("@b0t", ""),
+      dropId: dropIdToUse.replace('@b0t', ''),
       username: username,
     });
     const userId = drop.user.id;
@@ -108,9 +116,9 @@ function App({ __linkUrl = "" }: SettingsData) {
 
   useEffect(() => {
     const head = document.head;
-    const layloDropCss = document.createElement("link");
-    layloDropCss.rel = "stylesheet";
-    layloDropCss.href = "https://laylo.com/drop-pages/index.css";
+    const layloDropCss = document.createElement('link');
+    layloDropCss.rel = 'stylesheet';
+    layloDropCss.href = 'https://laylo.com/drop-pages/index.css';
     head.appendChild(layloDropCss);
   }, []);
 
@@ -119,21 +127,21 @@ function App({ __linkUrl = "" }: SettingsData) {
       // Must be set BEFORE laylo.js loads — the embed reads __CAPTCHA_PROVIDER__ at init.
       // "shadow" runs reCAPTCHA + Turnstile in parallel; reCAPTCHA token is used,
       // Turnstile is logged for metrics. Matches laylo-drop-page production setting.
-      (window as any).__CAPTCHA_PROVIDER__ = "shadow";
+      (window as any).__CAPTCHA_PROVIDER__ = 'shadow';
 
-      await loadScript("https://embed.laylo.com/linktree/laylo.js");
+      await loadScript('https://embed.laylo.com/linktree/laylo.js');
       loadedLaylo.current = true;
       await Promise.allSettled([
         loadScript(
-          "https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily"
+          'https://www.google.com/recaptcha/api.js?render=6LfaRWApAAAAAPvWsG2tsIhBCLEdXyz_EUQtQily'
         ),
         loadScript(
-          "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+          'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit'
         ),
       ]);
 
-      const style = document.createElement("style");
-      style.innerHTML = ".grecaptcha-badge { display: none; }";
+      const style = document.createElement('style');
+      style.innerHTML = '.grecaptcha-badge { display: none; }';
       document.head.appendChild(style);
     };
 
@@ -152,7 +160,7 @@ function App({ __linkUrl = "" }: SettingsData) {
 
 const loadScript = (src: string) =>
   new Promise((resolve, reject) => {
-    const script = document.createElement("script");
+    const script = document.createElement('script');
     script.src = src;
     script.onload = resolve;
     script.onerror = reject;
